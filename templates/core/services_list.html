@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Searchable Digital Services Directory • HOMline DIGI seva{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-navy text-white">
+  <div class="container text-center py-2">
+    <span class="badge bg-gold text-dark px-3 py-2 rounded-pill font-monospace fw-bold text-uppercase mb-3">Service Directory</span>
+    <h1 class="display-5 fw-extrabold text-white mb-3">Explore Supported Digital Services</h1>
+    <p class="lead text-white-50 max-width-700 mx-auto mb-4">
+      Search by category or keyword to find guidance for government identity, education, business registrations, digital signatures & online application processes.
+    </p>
+
+    <!-- Search Bar -->
+    <div class="max-width-700 mx-auto">
+      <form action="{% url 'services_list' %}" method="GET" class="d-flex gap-2">
+        {% if selected_category_slug and selected_category_slug != 'all' %}
+          <input type="hidden" name="category" value="{{ selected_category_slug }}">
+        {% endif %}
+        <div class="input-group input-group-lg shadow-sm">
+          <input type="text" name="q" value="{{ search_query }}" class="form-control" placeholder="Search service (e.g. PAN, Passport, CUET exam, MSME)...">
+          <button type="submit" class="btn btn-teal px-4">
+            <i class="bi bi-search me-1"></i> Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-soft-mist">
+  <div class="container">
+    <!-- Category Filter Pills -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+      <a href="{% url 'services_list' %}" class="btn {% if selected_category_slug == 'all' %}btn-navy{% else %}btn-outline-navy bg-white{% endif %} rounded-pill px-4">
+        All Categories
+      </a>
+      {% for cat in categories %}
+        <a href="{% url 'services_list' %}?category={{ cat.slug }}" class="btn {% if selected_category_slug == cat.slug %}btn-navy{% else %}btn-outline-navy bg-white{% endif %} rounded-pill px-4">
+          <i class="bi {{ cat.icon_class }} me-1"></i> {{ cat.name }}
+        </a>
+      {% endfor %}
+    </div>
+
+    <!-- Required Service Disclaimer -->
+    <div class="disclaimer-box mb-5">
+      <div class="d-flex align-items-start gap-3">
+        <i class="bi bi-info-circle-fill fs-4 text-warning flex-shrink-0"></i>
+        <div>
+          <strong class="d-block text-dark">Required Service Disclaimer:</strong>
+          HOMline provides assistance for supported online services. Availability, processing time, eligibility, approval and final decisions are determined by the respective authority, institution or third-party service provider.
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Grid -->
+    {% if services %}
+      <div class="row g-4">
+        {% for service in services %}
+        <div class="col-lg-4 col-md-6">
+          <div class="homline-card d-flex flex-column justify-content-between bg-white">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="brand-icon-box bg-soft-mist text-navy" style="width: 50px; height: 50px; font-size: 1.5rem;">
+                  <i class="bi {{ service.icon_class }}"></i>
+                </div>
+                {% if service.badge %}
+                  <span class="badge bg-gold text-dark fw-bold px-3 py-1 rounded-pill">{{ service.badge }}</span>
+                {% endif %}
+              </div>
+              <span class="badge bg-light text-navy border border-teal small mb-2">{{ service.category.name }}</span>
+              <h5 class="fw-bold text-navy mb-2">{{ service.title }}</h5>
+              <p class="text-muted small mb-3">{{ service.short_summary }}</p>
+
+              <div class="fee-badge-box">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="small text-muted">HOMline Charge:</span>
+                  <span class="fee-badge-homline">{{ service.homline_charge }}</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-1">
+                  <span class="small text-muted">3rd Party/Gov Fee:</span>
+                  <span class="fee-badge-thirdparty">{{ service.third_party_fee }}</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-1">
+                  <span class="small text-muted">Est. Processing:</span>
+                  <span class="font-monospace text-teal small fw-bold">{{ service.processing_time }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-3">
+              <a href="{% url 'service_detail' slug=service.slug %}" class="btn btn-outline-navy btn-sm flex-grow-1">View Details</a>
+              <button type="button" class="btn btn-teal btn-sm px-3" data-bs-toggle="modal" data-bs-target="#requestModal" data-bs-service-id="{{ service.id }}">
+                Request Service
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center py-5">
+        <i class="bi bi-search-heart text-muted display-1"></i>
+        <h4 class="text-navy fw-bold mt-3">No Services Found</h4>
+        <p class="text-muted">Try searching with a different term or clear filters to view all services.</p>
+        <a href="{% url 'services_list' %}" class="btn btn-teal mt-2">Reset Filter & Search</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

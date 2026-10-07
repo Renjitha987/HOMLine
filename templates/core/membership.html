@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Membership Plans & Welcome Benefits • HOMline DIGI seva{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-navy text-white text-center">
+  <div class="container py-2">
+    <span class="badge bg-gold text-dark px-3 py-2 rounded-pill font-monospace fw-bold text-uppercase mb-3">Membership Benefits</span>
+    <h1 class="display-5 fw-extrabold text-white mb-3">Become a HOMline Member</h1>
+    <p class="lead text-white-50 max-width-700 mx-auto mb-0">
+      Access priority assistance options, special service fee discounts, dedicated digital support, and welcome credit benefits for individuals, families & small businesses.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-soft-mist">
+  <div class="container">
+    <div class="row g-4 mb-5">
+      {% for plan in plans %}
+      <div class="col-lg-4 col-md-6">
+        <div class="homline-card membership-card {% if plan.is_popular %}popular bg-white shadow-lg{% else %}bg-white{% endif %} d-flex flex-column justify-content-between">
+          {% if plan.is_popular %}
+            <div class="popular-badge">Most Popular</div>
+          {% endif %}
+          <div>
+            <span class="badge bg-light text-navy border mb-2 font-monospace">{{ plan.name }}</span>
+            <h3 class="fw-extrabold text-navy mb-1">{{ plan.price }}</h3>
+            <p class="text-muted small mb-4">{{ plan.tagline }}</p>
+
+            <div class="border-top border-bottom py-3 mb-4">
+              <h6 class="fw-bold text-navy mb-2"><i class="bi bi-star-fill text-gold me-1"></i> Membership Benefits:</h6>
+              <ul class="list-unstyled text-muted small mb-0">
+                {% for feature in plan.get_features_list %}
+                  <li class="mb-2 d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-teal flex-shrink-0 mt-1"></i>
+                    <span>{{ feature }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold text-teal mb-2"><i class="bi bi-gift-fill me-1"></i> Welcome Benefits:</h6>
+              <ul class="list-unstyled text-muted small mb-0">
+                {% for benefit in plan.get_welcome_benefits_list %}
+                  <li class="mb-2 d-flex align-items-start gap-2">
+                    <i class="bi bi-patch-check-fill text-gold flex-shrink-0 mt-1"></i>
+                    <span>{{ benefit }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <button type="button" class="btn {% if plan.is_popular %}btn-teal{% else %}btn-navy{% endif %} w-100 fw-bold py-2 mt-3" data-bs-toggle="modal" data-bs-target="#membershipEnquiryModal" data-bs-plan-id="{{ plan.id }}">
+            Enquire For {{ plan.name }}
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Charges Policy Box -->
+    <div class="homline-card bg-white p-4 p-md-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h4 class="fw-bold text-navy mb-2"><i class="bi bi-info-circle-fill text-teal me-2"></i> Note on Membership & Service Charges</h4>
+          <p class="text-muted mb-0">
+            HOMline membership discounts apply strictly to the HOMline Service Charge. Official third-party/application fees paid to government bodies or external institutions are separate and subject to respective provider rates.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <button type="button" class="btn btn-outline-navy" data-bs-toggle="modal" data-bs-target="#membershipEnquiryModal">
+            Submit Membership Enquiry
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Membership Enquiry Modal -->
+<div class="modal fade" id="membershipEnquiryModal" tabindex="-1" aria-labelledby="membershipModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 border-0">
+      <div class="modal-header bg-navy text-white p-4">
+        <h5 class="modal-title font-brand text-white" id="membershipModalLabel">Enquire About HOMline Membership</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{% url 'membership' %}" method="POST" class="p-4">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label fw-bold text-navy">Full Name *</label>
+          <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold text-navy">Mobile Number *</label>
+          <input type="tel" name="mobile" class="form-control" placeholder="Mobile Number" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold text-navy">Email Address</label>
+          <input type="email" name="email" class="form-control" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold text-navy">Preferred Membership Plan</label>
+          <select name="preferred_plan" class="form-select">
+            {% for plan in plans %}
+              <option value="{{ plan.id }}">{{ plan.name }} ({{ plan.price }})</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold text-navy">Additional Notes / Message</label>
+          <textarea name="notes" class="form-control" rows="3" placeholder="Tell us if you need family coverage or specific business services..."></textarea>
+        </div>
+        <div class="d-flex justify-content-end gap-2">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-teal px-4">Submit Enquiry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

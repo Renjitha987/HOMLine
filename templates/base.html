@@ -1,0 +1,363 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}HOMline DIGI seva • Digital Services. Simplified for You.{% endblock %}</title>
+  <meta name="description" content="{% block meta_desc %}Access essential online services with reliable assistance, convenient digital support and guidance — from the comfort of your home. Phone / WhatsApp: 6282268453.{% endblock %}">
+  
+  <!-- SEO Tags -->
+  <meta name="author" content="AMDG Group">
+  <meta name="keywords" content="HOMline, DIGI seva, digital services, online application assistance, PAN card online, passport application assistance, voter ID online, exam form filling, Udyam MSME, digital certificates">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Brand CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- 01 Announcement Bar -->
+  <div class="announcement-bar text-center">
+    <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+      <div>
+        <span class="announcement-badge">NEW</span>
+        <span>Passport, PAN Card & Exam Assistance Now Live! Access from your home.</span>
+      </div>
+      <div class="d-flex align-items-center gap-3 font-monospace small">
+        <a href="tel:6282268453" class="text-white text-decoration-none">
+          <i class="bi bi-telephone-fill text-gold me-1"></i> 6282268453
+        </a>
+        <span class="opacity-50">|</span>
+        <a href="https://wa.me/916282268453" target="_blank" class="text-white text-decoration-none">
+          <i class="bi bi-whatsapp text-success me-1"></i> WhatsApp Support
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 Header Navbar -->
+  <header class="sticky-header">
+    <nav class="navbar navbar-expand-lg navbar-light py-2">
+      <div class="container">
+        <a class="navbar-brand navbar-brand-logo" href="{% url 'home' %}">
+          <div class="brand-icon-box">
+            <i class="bi bi-house-gear-fill"></i>
+          </div>
+          <div>
+            <div class="brand-title">HOMline <span class="text-teal fs-6 font-monospace">DIGI seva</span></div>
+            <div class="brand-tag">An Initiative of AMDG Group</div>
+          </div>
+        </a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 py-2 py-lg-0">
+            <li class="nav-item">
+              <a class="nav-link {% if active_tab == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_tab == 'about' %}active{% endif %}" href="{% url 'about' %}">About HOMline</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_tab == 'services' %}active{% endif %}" href="{% url 'services_list' %}">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_tab == 'how_it_works' %}active{% endif %}" href="{% url 'how_it_works' %}">How It Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_tab == 'membership' %}active{% endif %}" href="{% url 'membership' %}">Membership</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_tab == 'updates' %}active{% endif %}" href="{% url 'updates_list' %}">Latest Updates</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_tab == 'faqs' %}active{% endif %}" href="{% url 'faqs' %}">FAQs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_tab == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2">
+            <a href="tel:6282268453" class="btn btn-navy text-nowrap btn-sm d-none d-xl-inline-flex align-items-center gap-1">
+              <i class="bi bi-telephone-outbound-fill text-gold"></i> Call Now
+            </a>
+            <a href="https://wa.me/916282268453?text=Hi%20HOMline,%20I%20want%20to%20enquire%20about%20a%20digital%20service." target="_blank" class="btn btn-whatsapp text-nowrap btn-sm d-inline-flex align-items-center gap-1">
+              <i class="bi bi-whatsapp"></i> WhatsApp Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Django Messages Alert Banner -->
+  {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show rounded-4 shadow-sm" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Main Dynamic Page Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- 14 Final CTA Banner (Visible across subpages) -->
+  <section class="py-5 bg-navy text-white text-center mt-5">
+    <div class="container">
+      <div class="max-width-700 mx-auto">
+        <span class="badge bg-gold text-dark font-monospace px-3 py-2 rounded-pill text-uppercase mb-3">Instant Assistance</span>
+        <h2 class="fw-extrabold display-6 mb-3 text-white">Don't Know Where to Start?</h2>
+        <p class="lead text-white-50 mb-4">Call or WhatsApp HOMline. You don't have to figure out every digital service alone. HOMline helps you navigate it.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="https://wa.me/916282268453?text=Hi%20HOMline,%20I%20need%20help%20starting%20my%20digital%20service%20request." target="_blank" class="btn btn-whatsapp btn-lg px-4">
+            <i class="bi bi-whatsapp me-2"></i> WHATSAPP HOMLINE NOW
+          </a>
+          <a href="tel:6282268453" class="btn btn-teal btn-lg px-4">
+            <i class="bi bi-telephone-fill me-2"></i> CALL 6282268453
+          </a>
+          <button type="button" class="btn btn-outline-light btn-lg px-4" data-bs-toggle="modal" data-bs-target="#requestModal">
+            <i class="bi bi-pencil-square me-2"></i> Request Online
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 Footer Structure -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Column 1: HOMline Description & Brand -->
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="brand-icon-box" style="width: 38px; height: 38px; font-size: 1.2rem;">
+              <i class="bi bi-house-gear-fill"></i>
+            </div>
+            <h5 class="text-white font-brand mb-0 fs-4">HOMline DIGI seva</h5>
+          </div>
+          <p class="text-white-50 small mb-3">
+            Digital Services. Simplified for You. Access essential online services with reliable assistance, convenient digital support and guidance — from the comfort of your home.
+          </p>
+          <div class="badge bg-teal text-white px-3 py-2 rounded-pill font-monospace small mb-3">
+            <i class="bi bi-shield-check me-1"></i> Connecting Convenience
+          </div>
+          <p class="small text-white-50 mb-0">An Initiative of <strong>AMDG Group</strong></p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h5 class="footer-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About HOMline</a></li>
+            <li><a href="{% url 'services_list' %}">Services Directory</a></li>
+            <li><a href="{% url 'how_it_works' %}">How It Works</a></li>
+            <li><a href="{% url 'membership' %}">Membership Plans</a></li>
+            <li><a href="{% url 'updates_list' %}">Latest Updates</a></li>
+            <li><a href="{% url 'faqs' %}">FAQs</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Support -->
+        <div class="col-lg-3 col-md-6 col-6">
+          <h5 class="footer-title">Support & Service</h5>
+          <ul class="footer-links">
+            <li><a href="tel:6282268453"><i class="bi bi-telephone me-1 text-gold"></i> Call 6282268453</a></li>
+            <li><a href="https://wa.me/916282268453" target="_blank"><i class="bi bi-whatsapp me-1 text-success"></i> WhatsApp 6282268453</a></li>
+            <li><a href="{% url 'request_service' %}"><i class="bi bi-pencil-square me-1 text-cyan"></i> Request a Service</a></li>
+            <li><a href="{% url 'track_request' %}"><i class="bi bi-search me-1 text-teal"></i> Track Your Request</a></li>
+            <li><a href="mailto:homlinedigital@gmail.com"><i class="bi bi-envelope me-1"></i> homlinedigital@gmail.com</a></li>
+            <li><a href="https://www.amdgmedia.co.in" target="_blank"><i class="bi bi-globe me-1"></i> www.amdgmedia.co.in</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Policies -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-title">Policies & Notices</h5>
+          <ul class="footer-links">
+            <li><a href="{% url 'policy' policy_name='terms' %}">Terms & Conditions</a></li>
+            <li><a href="{% url 'policy' policy_name='privacy' %}">Privacy Policy</a></li>
+            <li><a href="{% url 'policy' policy_name='refund' %}">Refund Policy</a></li>
+            <li><a href="{% url 'policy' policy_name='cancellation' %}">Cancellation Policy</a></li>
+            <li><a href="{% url 'policy' policy_name='data-protection' %}">Data Protection & Confidentiality</a></li>
+            <li><a href="{% url 'policy' policy_name='disclaimer' %}">Service Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <div>
+          © 2026 HOMline DIGI seva. All Rights Reserved. An Initiative of AMDG Group.
+        </div>
+        <div class="text-white-50">
+          Designed for accessibility, trust & digital empowerment.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 14 Mobile-First Fixed Bottom Navigation -->
+  <div class="fixed-mobile-bottom-nav d-md-none">
+    <a href="https://wa.me/916282268453?text=Hi%20HOMline,%20I%20need%20assistance." target="_blank" class="mobile-nav-btn btn-whatsapp">
+      <i class="bi bi-whatsapp"></i> WhatsApp
+    </a>
+    <a href="tel:6282268453" class="mobile-nav-btn btn-navy">
+      <i class="bi bi-telephone-fill"></i> Call
+    </a>
+    <button type="button" class="mobile-nav-btn btn-teal border-0" data-bs-toggle="modal" data-bs-target="#requestModal">
+      <i class="bi bi-pencil-square"></i> Request
+    </button>
+  </div>
+
+  <!-- Floating WhatsApp Smart Assistant Button & Chat Card -->
+  <div class="floating-whatsapp-trigger" id="waAssistantTrigger" title="HOMline Digital Assistant">
+    <i class="bi bi-whatsapp"></i>
+  </div>
+
+  <div class="whatsapp-chat-box" id="waAssistantBox">
+    <div class="p-3 bg-whatsapp text-white d-flex justify-content-between align-items-center" style="background-color: #075E54;">
+      <div class="d-flex align-items-center gap-2">
+        <div class="brand-icon-box" style="width: 32px; height: 32px; font-size: 1rem; background: #123B5D;">
+          <i class="bi bi-headset"></i>
+        </div>
+        <div>
+          <strong class="d-block text-white mb-0" style="font-size: 0.9rem;">HOMline Digital Assistant</strong>
+          <small class="text-white-50" style="font-size: 0.75rem;"><i class="bi bi-circle-fill text-success" style="font-size: 0.5rem;"></i> Online (6282268453)</small>
+        </div>
+      </div>
+      <button type="button" class="btn-close btn-close-white" id="waAssistantClose" aria-label="Close"></button>
+    </div>
+    
+    <div class="p-3 bg-light" style="max-height: 280px; overflow-y: auto;">
+      <div class="p-2 bg-white rounded-3 shadow-sm mb-3 small">
+        👋 Hi there! Welcome to HOMline DIGI seva. How can we assist your digital application today?
+      </div>
+
+      <div class="d-grid gap-2">
+        <button onclick="sendCustomWhatsAppMessage('Hi HOMline, I need help with PAN Card application.')" class="btn btn-outline-success btn-sm text-start font-monospace">
+          🪪 PAN Card Application Help
+        </button>
+        <button onclick="sendCustomWhatsAppMessage('Hi HOMline, I want to book a Passport Appointment slot.')" class="btn btn-outline-success btn-sm text-start font-monospace">
+          🛂 Passport Appointment Slot
+        </button>
+        <button onclick="sendCustomWhatsAppMessage('Hi HOMline, I need guidance for Exam Registration / Admission.')" class="btn btn-outline-success btn-sm text-start font-monospace">
+          🎓 Exam & Admission Form
+        </button>
+        <button onclick="sendCustomWhatsAppMessage('Hi HOMline, I want to check my Request Status.')" class="btn btn-outline-success btn-sm text-start font-monospace">
+          🔍 Track Request Status
+        </button>
+      </div>
+
+      <div class="mt-3">
+        <label class="form-label small fw-bold text-muted mb-1">Type custom enquiry:</label>
+        <div class="input-group input-group-sm">
+          <input type="text" id="waCustomMessageInput" class="form-control" placeholder="Type your message...">
+          <button onclick="sendCustomWhatsAppMessage()" class="btn btn-whatsapp" type="button">
+            <i class="bi bi-send-fill"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Request Modal Form -->
+  <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content rounded-4 border-0 shadow-lg">
+        <div class="modal-header bg-navy text-white p-4">
+          <div class="d-flex align-items-center gap-2">
+            <div class="brand-icon-box" style="width: 36px; height: 36px; font-size: 1.1rem;">
+              <i class="bi bi-send-fill"></i>
+            </div>
+            <div>
+              <h5 class="modal-title font-brand text-white mb-0" id="requestModalLabel">Request a Digital Service</h5>
+              <small class="text-white-50">Provide your details for instant guidance & assistance</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{% url 'home' %}" method="POST" enctype="multipart/form-data" class="p-4">
+          {% csrf_token %}
+          <input type="hidden" name="submit_request" value="1">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Full Name <span class="text-danger">*</span></label>
+              <input type="text" name="full_name" class="form-control form-control-lg" placeholder="Enter your full name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Mobile Number <span class="text-danger">*</span></label>
+              <input type="tel" name="mobile" class="form-control form-control-lg" placeholder="e.g. 9876543210" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Email Address (Optional)</label>
+              <input type="email" name="email" class="form-control form-control-lg" placeholder="name@example.com">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Preferred Service</label>
+              <select name="service" id="serviceSelect" class="form-select form-select-lg">
+                <option value="">Select from supported services...</option>
+                {% for s in featured_services %}
+                  <option value="{{ s.id }}">{{ s.title }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold text-navy">Requirement Details <span class="text-danger">*</span></label>
+              <textarea name="requirement_details" class="form-control" rows="3" placeholder="Describe what digital service or guidance you need (e.g. fresh PAN card, passport appointment, exam form filling)..." required></textarea>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Preferred Contact Channel</label>
+              <select name="contact_preference" class="form-select">
+                <option value="WhatsApp" selected>WhatsApp Message</option>
+                <option value="Call">Direct Phone Call</option>
+                <option value="Email">Email Communication</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Upload Document (Optional)</label>
+              <input type="file" name="document_upload" class="form-control" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+            </div>
+          </div>
+          <div class="alert alert-light border border-teal rounded-3 mt-3 p-3 small text-muted">
+            <i class="bi bi-shield-lock-fill text-teal me-1"></i> Your details are handled with strict confidentiality per HOMline privacy practices.
+          </div>
+          <div class="d-flex justify-content-end gap-2 mt-4">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-teal px-4">Submit Service Request <i class="bi bi-arrow-right ms-1"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main JS -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

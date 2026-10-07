@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}How HOMline Works • 4-Step Customer Journey{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-navy text-white text-center">
+  <div class="container py-2">
+    <span class="badge bg-gold text-dark px-3 py-2 rounded-pill font-monospace fw-bold text-uppercase mb-3">Customer Journey</span>
+    <h1 class="display-5 fw-extrabold text-white mb-3">How HOMline Works</h1>
+    <p class="lead text-white-50 max-width-700 mx-auto mb-0">
+      Simple, guided, and convenient 4-step digital service process without leaving your home.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4 mb-5">
+      <!-- Step 01 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="homline-card bg-soft-mist p-4 h-100">
+          <div class="step-number mb-2">01</div>
+          <div class="brand-icon-box bg-navy text-white mb-3" style="width: 52px; height: 52px; font-size: 1.4rem;">
+            <i class="bi bi-ui-checks"></i>
+          </div>
+          <h4 class="fw-bold text-navy mb-2">Choose Your Service</h4>
+          <p class="text-muted small">
+            Browse our comprehensive digital service directory (PAN, Passport, Voter ID, Exam Registration, MSME, Certificates) and select the assistance you require.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="homline-card bg-soft-mist p-4 h-100">
+          <div class="step-number mb-2">02</div>
+          <div class="brand-icon-box bg-success text-white mb-3" style="width: 52px; height: 52px; font-size: 1.4rem;">
+            <i class="bi bi-whatsapp"></i>
+          </div>
+          <h4 class="fw-bold text-navy mb-2">Contact HOMline</h4>
+          <p class="text-muted small">
+            Call HOMline support directly at <strong>6282268453</strong> or send a quick WhatsApp message with your requirement or service query.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="homline-card bg-soft-mist p-4 h-100">
+          <div class="step-number mb-2">03</div>
+          <div class="brand-icon-box bg-teal text-white mb-3" style="width: 52px; height: 52px; font-size: 1.4rem;">
+            <i class="bi bi-shield-upload"></i>
+          </div>
+          <h4 class="fw-bold text-navy mb-2">Submit Details</h4>
+          <p class="text-muted small">
+            Provide the required application information and document photos securely via WhatsApp or online portal upload.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 04 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="homline-card bg-soft-mist p-4 h-100">
+          <div class="step-number mb-2">04</div>
+          <div class="brand-icon-box bg-gold text-dark mb-3" style="width: 52px; height: 52px; font-size: 1.4rem;">
+            <i class="bi bi-check2-circle"></i>
+          </div>
+          <h4 class="fw-bold text-navy mb-2">We Assist You</h4>
+          <p class="text-muted small">
+            HOMline assists with the applicable online process, handles document resizing/formatting, and keeps you informed every step of the way.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Process Details -->
+    <div class="homline-card bg-soft-mist p-4 p-md-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h3 class="fw-bold text-navy mb-2">Need Direct Help Right Now?</h3>
+          <p class="text-muted mb-0">Our support team is ready to guide you step-by-step over telephone or WhatsApp.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="https://wa.me/916282268453?text=Hi%20HOMline,%20I%20want%20to%20know%20how%20to%20start%20my%20service." target="_blank" class="btn btn-whatsapp btn-lg">
+            <i class="bi bi-whatsapp me-2"></i> WhatsApp 6282268453
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

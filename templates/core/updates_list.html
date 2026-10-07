@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Latest Updates, Notices & Announcements • HOMline DIGI seva{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-navy text-white text-center">
+  <div class="container py-2">
+    <span class="badge bg-gold text-dark px-3 py-2 rounded-pill font-monospace fw-bold text-uppercase mb-3">Announcements & Notices</span>
+    <h1 class="display-5 fw-extrabold text-white mb-3">Latest HOMline Updates</h1>
+    <p class="lead text-white-50 max-width-700 mx-auto mb-0">
+      Stay informed with service availability updates, new digital services, holiday hours & official notices.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-soft-mist">
+  <div class="container">
+    <!-- Filter Tags -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+      <a href="{% url 'updates_list' %}" class="btn {% if tag_filter == 'all' %}btn-navy{% else %}btn-outline-navy bg-white{% endif %} rounded-pill px-4">
+        All Updates
+      </a>
+      <a href="{% url 'updates_list' %}?tag=Service Update" class="btn {% if tag_filter == 'Service Update' %}btn-navy{% else %}btn-outline-navy bg-white{% endif %} rounded-pill px-4">
+        Service Updates
+      </a>
+      <a href="{% url 'updates_list' %}?tag=Important Notice" class="btn {% if tag_filter == 'Important Notice' %}btn-navy{% else %}btn-outline-navy bg-white{% endif %} rounded-pill px-4">
+        Important Notices
+      </a>
+      <a href="{% url 'updates_list' %}?tag=Service Availability Update" class="btn {% if tag_filter == 'Service Availability Update' %}btn-navy{% else %}btn-outline-navy bg-white{% endif %} rounded-pill px-4">
+        Availability Updates
+      </a>
+    </div>
+
+    <!-- Updates Grid -->
+    <div class="row g-4">
+      {% for update in updates %}
+      <div class="col-lg-4 col-md-6">
+        <div class="homline-card bg-white d-flex flex-column justify-content-between h-100">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="update-tag tag-service-update">{{ update.category_tag }}</span>
+              <small class="text-muted font-monospace">{{ update.published_at|date:"d M Y" }}</small>
+            </div>
+            <h5 class="fw-bold text-navy mb-2">{{ update.title }}</h5>
+            <p class="text-muted small mb-3">{{ update.summary }}</p>
+          </div>
+          <a href="{% url 'update_detail' slug=update.slug %}" class="btn btn-outline-navy btn-sm mt-3">
+            Read Full Notice &rarr;
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Request a Digital Service • HOMline DIGI seva{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-navy text-white text-center">
+  <div class="container py-2">
+    <span class="badge bg-gold text-dark px-3 py-2 rounded-pill font-monospace fw-bold text-uppercase mb-3">Online Request Form</span>
+    <h1 class="display-5 fw-extrabold text-white mb-3">Request Digital Service Assistance</h1>
+    <p class="lead text-white-50 max-width-700 mx-auto mb-0">
+      Fill out your details below. You will receive an instant Request ID to track status online or via WhatsApp.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-soft-mist">
+  <div class="container">
+    <div class="max-width-800 mx-auto">
+      <div class="homline-card bg-white p-4 p-md-5 shadow-lg border-0">
+        <form action="{% url 'request_service' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row g-4">
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Full Name <span class="text-danger">*</span></label>
+              {{ form.full_name }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Mobile Number <span class="text-danger">*</span></label>
+              {{ form.mobile }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Email Address (Optional)</label>
+              {{ form.email }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Selected Service</label>
+              {{ form.service }}
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold text-navy">Requirement Details <span class="text-danger">*</span></label>
+              {{ form.requirement_details }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Preferred Contact Channel</label>
+              {{ form.contact_preference }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold text-navy">Upload Document (Optional)</label>
+              {{ form.document_upload }}
+            </div>
+          </div>
+
+          <div class="disclaimer-box my-4">
+            <i class="bi bi-shield-lock-fill text-warning me-1"></i> HOMline handles all uploaded document files and identity details with strict privacy and confidentiality.
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-teal btn-lg fw-bold py-3">
+              Submit Service Request & Get Request ID <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

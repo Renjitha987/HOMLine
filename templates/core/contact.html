@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact & Support • HOMline DIGI seva{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-navy text-white text-center">
+  <div class="container py-2">
+    <span class="badge bg-gold text-dark px-3 py-2 rounded-pill font-monospace fw-bold text-uppercase mb-3">24×7 Support Channels</span>
+    <h1 class="display-5 fw-extrabold text-white mb-3">Contact HOMline Support</h1>
+    <p class="lead text-white-50 max-width-700 mx-auto mb-0">
+      Reach out via WhatsApp, direct phone call, email, or online enquiry form. We are here to simplify your digital services.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-soft-mist">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Contact Direct Cards -->
+      <div class="col-lg-5">
+        <div class="homline-card bg-white mb-4">
+          <h4 class="fw-bold text-navy mb-4"><i class="bi bi-headset text-teal me-2"></i> Contact Information</h4>
+          
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="brand-icon-box bg-navy text-white flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.3rem;">
+              <i class="bi bi-telephone-fill"></i>
+            </div>
+            <div>
+              <span class="text-muted small d-block">Phone / WhatsApp Support</span>
+              <strong class="text-navy fs-5 font-monospace">6282268453</strong>
+              <div class="mt-2 d-flex gap-2">
+                <a href="tel:6282268453" class="btn btn-navy btn-sm">Call Now</a>
+                <a href="https://wa.me/916282268453" target="_blank" class="btn btn-whatsapp btn-sm">WhatsApp Chat</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="brand-icon-box bg-teal text-white flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.3rem;">
+              <i class="bi bi-envelope-fill"></i>
+            </div>
+            <div>
+              <span class="text-muted small d-block">Official Support Email</span>
+              <strong class="text-navy font-monospace">homlinedigital@gmail.com</strong>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="brand-icon-box bg-gold text-dark flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.3rem;">
+              <i class="bi bi-globe"></i>
+            </div>
+            <div>
+              <span class="text-muted small d-block">Official Website</span>
+              <a href="https://www.amdgmedia.co.in" target="_blank" class="text-teal font-monospace fw-bold text-decoration-none">www.amdgmedia.co.in</a>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="p-3 bg-soft-mist rounded-3 border">
+            <h6 class="fw-bold text-navy mb-1"><i class="bi bi-building me-1 text-teal"></i> Organisation Attribution</h6>
+            <p class="text-muted small mb-0">HOMline DIGI seva • An Initiative of <strong>AMDG Group</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Message Form -->
+      <div class="col-lg-7">
+        <div class="homline-card bg-white p-4 p-md-5">
+          <h3 class="fw-bold text-navy mb-2">Send an Enquiry Message</h3>
+          <p class="text-muted small mb-4">Fill out this quick form and our support team will respond via Call / WhatsApp.</p>
+          
+          <form action="{% url 'contact' %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label fw-bold text-navy">Your Name *</label>
+              {{ form.name }}
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold text-navy">Mobile Number *</label>
+              {{ form.mobile }}
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-bold text-navy">How can HOMline help you today? *</label>
+              {{ form.message }}
+            </div>
+            <button type="submit" class="btn btn-navy btn-lg w-100 fw-bold">
+              Send Message to HOMline <i class="bi bi-send-fill ms-1"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

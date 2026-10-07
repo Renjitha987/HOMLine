@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About HOMline DIGI seva • Purpose, Vision & Values{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-navy text-white text-center">
+  <div class="container py-3">
+    <span class="badge bg-gold text-dark px-3 py-2 rounded-pill font-monospace fw-bold text-uppercase mb-3">Our Identity</span>
+    <h1 class="display-5 fw-extrabold text-white mb-3">About HOMline DIGI seva</h1>
+    <p class="lead text-white-50 max-width-700 mx-auto mb-0">
+      Dedicated to simplifying digital portal access, application assistance, and identity service guidance for every customer — right from their home.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="badge bg-teal text-white px-3 py-1 rounded-pill font-monospace mb-2">Service Philosophy</span>
+        <h2 class="fw-bold text-navy mb-4">You Don't Have to Figure Out Every Digital Service Alone.</h2>
+        <p class="text-muted mb-3">
+          As government portals, academic registration systems, and commercial licensing platforms shift online, many individuals face hurdles with technical guidelines, strict photo/signature sizes, document eligibility, and appointment booking queues.
+        </p>
+        <p class="text-muted mb-4">
+          HOMline DIGI seva was created as an initiative of <strong>AMDG Group</strong> to serve as a reliable, accessible bridge. We provide guided step-by-step assistance so that you can navigate supported online services conveniently and securely.
+        </p>
+        <div class="p-3 bg-soft-mist rounded-4 border-start border-4 border-teal mb-4">
+          <h6 class="fw-bold text-navy mb-1"><i class="bi bi-bullseye text-teal me-2"></i> Our Mission</h6>
+          <p class="text-muted small mb-0">To empower individuals and businesses with hassle-free digital portal guidance, responsive WhatsApp support, and transparent charges.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="homline-card bg-soft-mist p-4 p-md-5">
+          <h3 class="fw-bold text-navy mb-4">Core Principles & Values</h3>
+          <div class="d-flex gap-3 mb-4">
+            <div class="brand-icon-box bg-navy text-white flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.4rem;">
+              <i class="bi bi-house-door-fill"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-navy mb-1">1. Convenience First</h5>
+              <p class="text-muted small mb-0">No unneeded trips or endless waits. Request assistance digitally over phone or WhatsApp.</p>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3 mb-4">
+            <div class="brand-icon-box bg-teal text-white flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.4rem;">
+              <i class="bi bi-eye-fill"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-navy mb-1">2. Complete Transparency</h5>
+              <p class="text-muted small mb-0">We explicitly state our HOMline assistance fee separately from official government or third-party portal fees.</p>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3">
+            <div class="brand-icon-box bg-gold text-dark flex-shrink-0" style="width: 48px; height: 48px; font-size: 1.4rem;">
+              <i class="bi bi-shield-lock-fill"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold text-navy mb-1">3. Document Confidentiality</h5>
+              <p class="text-muted small mb-0">Your personal identity documents and records are handled with strict privacy protocols.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Organisation Attribution -->
+<section class="py-5 bg-soft-mist text-center">
+  <div class="container">
+    <div class="homline-card max-width-700 mx-auto bg-white p-5">
+      <div class="brand-icon-box mx-auto mb-3" style="width: 64px; height: 64px; font-size: 2rem;">
+        <i class="bi bi-building"></i>
+      </div>
+      <h4 class="fw-bold text-navy mb-2">An Initiative of AMDG Group</h4>
+      <p class="text-muted mb-4">HOMline DIGI seva operates under AMDG Group standards for accessibility, digital convenience, and customer trust.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="{% url 'contact' %}" class="btn btn-navy">Get in Touch</a>
+        <a href="{% url 'services_list' %}" class="btn btn-teal">Explore Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
