@@ -1,0 +1,8 @@
+{
+  "name": "homline",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "bash build_files.sh",
+    "vercel-build": "bash build_files.sh"
+  }
+}
