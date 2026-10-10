@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: hom-line
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn homline_project.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://hom-line.onrender.com,https://*.onrender.com"
