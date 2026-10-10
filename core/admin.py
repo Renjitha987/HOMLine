@@ -3,11 +3,13 @@ import urllib.parse
 from django.contrib import admin
 from django.http import HttpResponse
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.urls import reverse
 from .models import (
     Category, Service, Update, MembershipPlan, 
     MembershipEnquiry, ServiceRequest, ServiceRequestLog, FAQ, CustomerReview
 )
+
 
 # Admin Branding Configuration
 admin.site.site_header = "HOMline DIGI seva — Operations Panel"
@@ -137,8 +139,10 @@ class MembershipEnquiryAdmin(admin.ModelAdmin):
 
     def contact_info(self, obj):
         email_str = f'<br><span style="color: #64748b; font-size: 11px;">{obj.email}</span>' if obj.email else ''
-        return format_html('<strong>{}</strong>{}', obj.mobile, format_html(email_str))
+        return format_html('<strong>{}</strong>{}', obj.mobile, mark_safe(email_str))
     contact_info.short_description = "Contact"
+
+
 
     def plan_badge(self, obj):
         if obj.preferred_plan:
@@ -217,7 +221,7 @@ class ServiceRequestAdmin(admin.ModelAdmin):
         email_line = f'<div style="font-size: 11px; color: #64748b;">{obj.email}</div>' if obj.email else ''
         return format_html(
             '<div><strong style="color: #0f172a;">{}</strong><div style="font-size: 12px; color: #475569;">📞 {}</div>{}</div>',
-            obj.full_name, obj.mobile, format_html(email_line)
+            obj.full_name, obj.mobile, mark_safe(email_line)
         )
     customer_card.short_description = "Customer"
     customer_card.admin_order_field = "full_name"
@@ -229,9 +233,10 @@ class ServiceRequestAdmin(admin.ModelAdmin):
         return format_html(
             '<div><strong>{}</strong><br>{}</div>',
             obj.get_service_title(),
-            format_html(cat_badge)
+            mark_safe(cat_badge)
         )
     service_display.short_description = "Service"
+
 
     def status_badge(self, obj):
         colors = {
