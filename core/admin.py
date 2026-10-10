@@ -211,16 +211,16 @@ class ServiceRequestAdmin(admin.ModelAdmin):
 
     def request_id_badge(self, obj):
         return format_html(
-            '<span style="font-family: monospace; font-weight: 700; color: #0f172a; background: #e2e8f0; padding: 4px 8px; border-radius: 6px; font-size: 12px;">{}</span>',
+            '<span style="font-family: \'Plus Jakarta Sans\', monospace; font-weight: 700; color: #1d4ed8; background: #eff6ff; padding: 5px 10px; border-radius: 8px; font-size: 12px; border: 1px solid #bfdbfe; display: inline-block;">{}</span>',
             obj.request_id
         )
     request_id_badge.short_description = "Request ID"
     request_id_badge.admin_order_field = "request_id"
 
     def customer_card(self, obj):
-        email_line = f'<div style="font-size: 11px; color: #64748b;">{obj.email}</div>' if obj.email else ''
+        email_line = f'<div style="font-size: 12px; color: #64748b; margin-top: 2px;">{obj.email}</div>' if obj.email else ''
         return format_html(
-            '<div><strong style="color: #0f172a;">{}</strong><div style="font-size: 12px; color: #475569;">📞 {}</div>{}</div>',
+            '<div><strong style="color: #1e293b; font-size: 14px;">{}</strong><div style="font-size: 12px; color: #475569; margin-top: 2px;">📞 {}</div>{}</div>',
             obj.full_name, obj.mobile, mark_safe(email_line)
         )
     customer_card.short_description = "Customer"
@@ -229,30 +229,29 @@ class ServiceRequestAdmin(admin.ModelAdmin):
     def service_display(self, obj):
         cat_badge = ''
         if obj.service and obj.service.category:
-            cat_badge = f'<span style="font-size: 11px; background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 2px;">{obj.service.category.name}</span>'
+            cat_badge = f'<span style="font-size: 11px; background: #e0f2fe; color: #0284c7; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-top: 4px; font-weight: 600;">{obj.service.category.name}</span>'
         return format_html(
-            '<div><strong>{}</strong><br>{}</div>',
+            '<div><strong style="color: #1e293b; font-size: 13px;">{}</strong><br>{}</div>',
             obj.get_service_title(),
             mark_safe(cat_badge)
         )
     service_display.short_description = "Service"
 
-
     def status_badge(self, obj):
         colors = {
-            'Pending': ('#ea580c', '#ffedd5', '⏳'),
-            'Under Review': ('#854d0e', '#fef9c3', '🔍'),
-            'Processing': ('#0284c7', '#e0f2fe', '⚙️'),
-            'Information Required': ('#c2410c', '#ffedd5', '⚠️'),
-            'Completed': ('#16a34a', '#dcfce7', '✅'),
-            'Cancelled': ('#dc2626', '#fee2e2', '❌'),
+            'Pending': ('#b45309', '#fef3c7', '#fde68a', '⏳'),
+            'Under Review': ('#7e22ce', '#f3e8ff', '#e9d5ff', '🔍'),
+            'Processing': ('#0284c7', '#e0f2fe', '#bae6fd', '⚙️'),
+            'Information Required': ('#c2410c', '#ffedd5', '#fed7aa', '⚠️'),
+            'Completed': ('#15803d', '#dcfce7', '#bbf7d0', '✅'),
+            'Cancelled': ('#b91c1c', '#fee2e2', '#fecaca', '❌'),
         }
-        fg, bg, icon = colors.get(obj.status, ('#475569', '#f1f5f9', '📋'))
+        fg, bg, border, icon = colors.get(obj.status, ('#475569', '#f1f5f9', '#e2e8f0', '📋'))
         return format_html(
-            '<span style="display: inline-flex; align-items: center; gap: 4px; font-weight: 600; font-size: 12px; color: {}; background: {}; padding: 4px 10px; border-radius: 20px;">'
+            '<span style="display: inline-flex; align-items: center; gap: 5px; font-weight: 700; font-size: 12px; color: {}; background: {}; border: 1px solid {}; padding: 4px 12px; border-radius: 20px;">'
             '{} {}'
             '</span>',
-            fg, bg, icon, obj.status
+            fg, bg, border, icon, obj.status
         )
     status_badge.short_description = "Status"
     status_badge.admin_order_field = "status"
@@ -268,16 +267,17 @@ class ServiceRequestAdmin(admin.ModelAdmin):
 
         return format_html(
             '<div style="display: flex; gap: 6px; align-items: center;">'
-            '<a href="{}" target="_blank" title="Chat on WhatsApp" style="display: inline-flex; align-items: center; justify-content: center; background: #25d366; color: white; width: 28px; height: 28px; border-radius: 6px; text-decoration: none; font-size: 13px;">'
+            '<a href="{}" target="_blank" title="Chat on WhatsApp" style="display: inline-flex; align-items: center; justify-content: center; background: #22c55e; color: white; width: 30px; height: 30px; border-radius: 8px; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(34,197,94,0.3);">'
             '<i class="bi bi-whatsapp"></i></a>'
-            '<a href="{}" target="_blank" title="View Official Receipt PDF" style="display: inline-flex; align-items: center; justify-content: center; background: #0f172a; color: white; width: 28px; height: 28px; border-radius: 6px; text-decoration: none; font-size: 13px;">'
+            '<a href="{}" target="_blank" title="View Official Receipt PDF" style="display: inline-flex; align-items: center; justify-content: center; background: #2563eb; color: white; width: 30px; height: 30px; border-radius: 8px; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(37,99,235,0.3);">'
             '<i class="bi bi-file-earmark-text"></i></a>'
-            '<a href="{}" target="_blank" title="Open Tracking Page" style="display: inline-flex; align-items: center; justify-content: center; background: #0d9488; color: white; width: 28px; height: 28px; border-radius: 6px; text-decoration: none; font-size: 13px;">'
+            '<a href="{}" target="_blank" title="Open Tracking Page" style="display: inline-flex; align-items: center; justify-content: center; background: #0d9488; color: white; width: 30px; height: 30px; border-radius: 8px; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(13,148,136,0.3);">'
             '<i class="bi bi-box-arrow-up-right"></i></a>'
             '</div>',
             wa_url, receipt_url, track_url
         )
     quick_actions.short_description = "Quick Actions"
+
 
     # Status Bulk Actions
     def mark_as_under_review(self, request, queryset):

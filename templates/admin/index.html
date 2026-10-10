@@ -120,46 +120,46 @@
         <tbody>
           {% for req in recent_requests %}
           <tr style="border-bottom: 1px solid #f1f5f9; transition: background 0.15s ease;">
-            <td style="padding: 12px 14px; font-family: monospace; font-weight: 700; color: #0f172a;">
-              <a href="{% url 'admin:core_servicerequest_change' req.id %}" style="color: #0d9488; text-decoration: none;">
+            <td style="padding: 14px 16px; font-weight: 700;">
+              <a href="{% url 'admin:core_servicerequest_change' req.id %}" style="color: #1d4ed8; background: #eff6ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #bfdbfe; text-decoration: none; font-size: 13px;">
                 {{ req.request_id }}
               </a>
             </td>
-            <td style="padding: 12px 14px;">
-              <strong style="color: #0f172a;">{{ req.full_name }}</strong><br>
-              <span style="font-size: 0.8rem; color: #64748b;">📞 {{ req.mobile }}</span>
+            <td style="padding: 14px 16px;">
+              <strong style="color: #1e293b; font-size: 14px;">{{ req.full_name }}</strong><br>
+              <span style="font-size: 0.82rem; color: #64748b;">📞 {{ req.mobile }}</span>
             </td>
-            <td style="padding: 12px 14px; font-size: 0.88rem; color: #334155;">
+            <td style="padding: 14px 16px; font-size: 0.9rem; color: #334155; font-weight: 500;">
               {{ req.get_service_title }}
             </td>
-            <td style="padding: 12px 14px;">
+            <td style="padding: 14px 16px;">
               {% if req.status == 'Completed' %}
-                <span class="badge-interactive" style="background: #dcfce7; color: #16a34a;">✅ Completed</span>
+                <span class="badge-interactive" style="background: #dcfce7; color: #15803d; border-color: #bbf7d0;">✅ Completed</span>
               {% elif req.status == 'Processing' %}
-                <span class="badge-interactive" style="background: #e0f2fe; color: #0284c7;">⚙️ Processing</span>
+                <span class="badge-interactive" style="background: #e0f2fe; color: #0284c7; border-color: #bae6fd;">⚙️ Processing</span>
               {% elif req.status == 'Under Review' %}
-                <span class="badge-interactive" style="background: #fef9c3; color: #854d0e;">🔍 Under Review</span>
+                <span class="badge-interactive" style="background: #f3e8ff; color: #7e22ce; border-color: #e9d5ff;">🔍 Under Review</span>
               {% elif req.status == 'Cancelled' %}
-                <span class="badge-interactive" style="background: #fee2e2; color: #dc2626;">❌ Cancelled</span>
+                <span class="badge-interactive" style="background: #fee2e2; color: #b91c1c; border-color: #fecaca;">❌ Cancelled</span>
               {% else %}
-                <span class="badge-interactive" style="background: #ffedd5; color: #ea580c;"><span class="pulse-badge"></span> Pending</span>
+                <span class="badge-interactive" style="background: #fef3c7; color: #b45309; border-color: #fde68a;"><span class="pulse-badge"></span> Pending</span>
               {% endif %}
             </td>
-            <td style="padding: 12px 14px; font-size: 0.82rem; color: #64748b; font-family: monospace;">
+            <td style="padding: 14px 16px; font-size: 0.85rem; color: #64748b; font-weight: 500;">
               {{ req.created_at|date:"d M Y, h:i A" }}
             </td>
-            <td style="padding: 12px 14px; text-align: center;">
-              <div style="display: inline-flex; gap: 6px; align-items: center;">
-                <a href="https://wa.me/91{{ req.mobile }}?text=Hi%20{{ req.full_name }},%20HOMline%20support%20here%20regarding%20Request%20ID%20{{ req.request_id }}" target="_blank" title="WhatsApp Customer" style="display: inline-flex; align-items: center; justify-content: center; background: #25d366; color: white; width: 28px; height: 28px; border-radius: 6px; text-decoration: none; font-size: 13px;">
+            <td style="padding: 14px 16px; text-align: center;">
+              <div style="display: inline-flex; gap: 8px; align-items: center;">
+                <a href="https://wa.me/91{{ req.mobile }}?text=Hi%20{{ req.full_name }},%20HOMline%20support%20here%20regarding%20Request%20ID%20{{ req.request_id }}" target="_blank" title="WhatsApp Customer" style="display: inline-flex; align-items: center; justify-content: center; background: #22c55e; color: white; width: 30px; height: 30px; border-radius: 8px; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(34,197,94,0.3);">
                   <i class="bi bi-whatsapp"></i>
                 </a>
-                <a href="{% url 'receipt' request_id=req.request_id %}" target="_blank" title="View Receipt PDF" style="display: inline-flex; align-items: center; justify-content: center; background: #0f172a; color: white; width: 28px; height: 28px; border-radius: 6px; text-decoration: none; font-size: 13px;">
+                <a href="{% url 'receipt' request_id=req.request_id %}" target="_blank" title="View Receipt PDF" style="display: inline-flex; align-items: center; justify-content: center; background: #2563eb; color: white; width: 30px; height: 30px; border-radius: 8px; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(37,99,235,0.3);">
                   <i class="bi bi-file-earmark-text"></i>
                 </a>
-                <a href="{% url 'track_request_with_id' request_id=req.request_id %}" target="_blank" title="Open Tracking Page" style="display: inline-flex; align-items: center; justify-content: center; background: #0d9488; color: white; width: 28px; height: 28px; border-radius: 6px; text-decoration: none; font-size: 13px;">
+                <a href="{% url 'track_request_with_id' request_id=req.request_id %}" target="_blank" title="Open Tracking Page" style="display: inline-flex; align-items: center; justify-content: center; background: #0d9488; color: white; width: 30px; height: 30px; border-radius: 8px; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(13,148,136,0.3);">
                   <i class="bi bi-box-arrow-up-right"></i>
                 </a>
-                <a href="{% url 'admin:core_servicerequest_change' req.id %}" title="Edit Request" style="display: inline-flex; align-items: center; justify-content: center; background: #e2e8f0; color: #334155; width: 28px; height: 28px; border-radius: 6px; text-decoration: none; font-size: 13px;">
+                <a href="{% url 'admin:core_servicerequest_change' req.id %}" title="Edit Request" style="display: inline-flex; align-items: center; justify-content: center; background: #f1f5f9; color: #2563eb; width: 30px; height: 30px; border-radius: 8px; text-decoration: none; font-size: 14px; border: 1px solid #cbd5e1;">
                   <i class="bi bi-pencil"></i>
                 </a>
               </div>
@@ -167,6 +167,7 @@
           </tr>
           {% endfor %}
         </tbody>
+
       </table>
     </div>
   </div>
